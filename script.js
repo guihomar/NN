@@ -82,3 +82,32 @@ window.addEventListener("touchstart", (e) => {
   const touch = e.touches[0];
   crearExplosionPalabra(touch.clientX, touch.clientY);
 });
+
+document.body.addEventListener('click', function (e) {
+    const letra = document.createElement('span');
+    letra.textContent = '💌'; // Puedes cambiar por cualquier símbolo o letra
+    letra.style.position = 'fixed';
+    letra.style.left = `${e.clientX}px`;
+    letra.style.top = `${e.clientY}px`;
+    letra.style.fontSize = '2rem';
+    letra.style.color = '#ff69b4';
+    letra.style.opacity = '1';
+    letra.style.pointerEvents = 'none';
+
+    document.body.appendChild(letra);
+
+    // Animación simple hacia arriba y desvanecerse
+    let desplazamiento = 0;
+    const animar = () => {
+        desplazamiento += 1;
+        letra.style.transform = `translateY(-${desplazamiento}px)`;
+        letra.style.opacity = `${1 - desplazamiento / 60}`;
+        if (desplazamiento < 60) {
+            requestAnimationFrame(animar);
+        } else {
+            letra.remove();
+        }
+    };
+    animar();
+});
+
