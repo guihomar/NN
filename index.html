@@ -105,7 +105,6 @@
   <canvas id="loveRain"></canvas>
 
   <script>
-    // Música
     const music = document.getElementById('backgroundMusic');
     const musicControl = document.getElementById('music-control');
     let musicPlaying = false;
@@ -139,7 +138,6 @@
       }, { once: true });
     });
 
-    // Canvas tamaño
     const galaxyCanvas = document.getElementById('galaxyCanvas');
     const galaxyCtx = galaxyCanvas.getContext('2d');
     const loveCanvas = document.getElementById('loveRain');
@@ -152,7 +150,6 @@
     resizeCanvases();
     window.addEventListener('resize', resizeCanvases);
 
-    // Estrellas pastel
     class Star {
       constructor() {
         this.x = Math.random() * galaxyCanvas.width;
@@ -197,10 +194,9 @@
     }
     animateGalaxy();
 
-    // Partículas amorosas
     const compliments = [
       "Tus ojos brillan", "Sonrisa perfecta", "Eres angelical",
-      "Belleza única", "Corazon de Manjar", "Labios de miel",
+      "Belleza única", "Corazón de manjar", "Labios de miel",
       "Eres un sueño", "Mi dulce niña", "Eres magia",
       "Mi razón de ser", "Diosa terrenal", "Mi inspiración"
     ];
@@ -259,20 +255,17 @@
     }
     animateLove();
 
-    // Clic con frases flotantes
     const frasesClick = [
-      "Evelyn te extraño", "Te pienso siempre 💭", "Perdoname Evelyn",
+      "Evelyn te extraño", "Te pienso siempre 💭", "Perdóname Evelyn",
       "Mi corazón es tuyo ❤️", "Nunca te olvido 💌", "Eres mi todo ✨"
     ];
     let fraseIndex = 0;
 
     document.body.addEventListener('click', (e) => {
       if (!musicPlaying) playMusic();
-
       const frase = document.createElement('span');
       frase.textContent = frasesClick[fraseIndex];
       fraseIndex = (fraseIndex + 1) % frasesClick.length;
-
       frase.style.position = 'fixed';
       frase.style.left = `${e.clientX}px`;
       frase.style.top = `${e.clientY}px`;
@@ -285,15 +278,37 @@
       frase.style.transition = 'transform 1.2s ease-out, opacity 1.2s ease-out';
       frase.style.whiteSpace = 'nowrap';
       document.body.appendChild(frase);
-
       requestAnimationFrame(() => {
         frase.style.transform = 'translateY(-70px)';
         frase.style.opacity = '0';
       });
-
       setTimeout(() => frase.remove(), 1200);
     });
   </script>
+
+  <!-- Contador oculto de visitas con JSONBin -->
+  <script>
+    const BIN_ID = "68662bd48960c979a5b6425f";
+    const API_KEY = "$2a$10$M60NJuCRZTHwPslxNr8mtuo8wadHKj5NKfjZXWjQ8UCw.Kge.ZcJ2";
+    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+    fetch(BIN_URL, {
+      headers: { "X-Master-Key": API_KEY }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const visitas = data.record.visitas + 1;
+      return fetch(BIN_URL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": API_KEY
+        },
+        body: JSON.stringify({ visitas })
+      });
+    })
+    .then(() => console.log("Contador oculto actualizado."))
+    .catch(err => console.error("Error contador:", err));
+  </script>
 </body>
 </html>
-	
