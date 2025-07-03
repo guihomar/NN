@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #ffe4e1, #ffc0cb);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  overflow: hidden;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 40px;
+  font-size: 4rem;
+  color: #d63384;
+  z-index: 1;
+  animation: latido 2s infinite;
+  position: relative;
+}
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.mensaje {
+  margin-top: 80px;
+  font-size: 1.5rem;
+  color: #800000;
+  position: relative;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.4);
+  display: inline-block;
+  padding: 15px 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+audio {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+.stickers {
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.stickers img {
+  width: 100px;
+  margin: 0 10px;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.stickers img:hover {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+.explosion-palabra {
+  position: fixed;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff69b4;
+  transform: scale(0);
+  animation: explotar 1.5s ease-out forwards;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 9999;
+  text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;
+}
+
+@keyframes explotar {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(0px);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.5) translateY(-30px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2) translateY(-100px);
+  }
+}
+
+#contenedor-lluvia {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.palabra-flotante {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff69b4;
+  white-space: nowrap;
+  animation-name: caer;
+  animation-timing-function: ease-in;
+  opacity: 0.8;
+  text-shadow: 0 0 5px #ffb6c1;
+}
+
+@keyframes caer {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes caerPluma {
+  0% {
+    transform: translate(0, -10vh) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-30px, 20vh) rotate(-15deg);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(30px, 40vh) rotate(15deg);
+  }
+  60% {
+    transform: translate(-25px, 60vh) rotate(-10deg);
+  }
+  80% {
+    transform: translate(25px, 80vh) rotate(10deg);
+  }
+  100% {
+    transform: translate(0, 100vh) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+.palabra-flotante {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+.palabra-flotante {
+  position: absolute;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0.9;
+  pointer-events: none;
+  animation-name: caerPluma;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
